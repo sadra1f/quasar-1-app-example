@@ -84,6 +84,7 @@ module.exports = configure(function (/* ctx */) {
     framework: {
       iconSet: 'material-icons', // Quasar icon set
       lang: 'en-us', // Quasar language pack
+      cssAddon: true, // Flex Addons
       config: {},
 
       // Possible values for "importStrategy":

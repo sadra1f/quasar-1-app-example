@@ -5,8 +5,8 @@
         <q-item-label header class="label text-grey-10 q-py-md-xl text-center">
           Data<strong>Guard</strong>
         </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
+        <DrawerLink
+          v-for="link in links"
           :key="link.title"
           v-bind="link"
           class="q-px-md-xl"
@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import EssentialLink from 'components/EssentialLink.vue';
+import DrawerLink from 'components/DrawerLink.vue';
 
 const linksData = [
   {
@@ -40,9 +40,9 @@ const linksData = [
 ];
 
 @Component({
-  components: { EssentialLink },
+  components: { DrawerLink },
 })
 export default class MainLayout extends Vue {
-  essentialLinks = linksData;
+  links = linksData;
 }
 </script>

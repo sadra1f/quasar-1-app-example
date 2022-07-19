@@ -14,7 +14,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
-export default class EssentialLink extends Vue {
+export default class DrawerLink extends Vue {
   @Prop({ type: String, required: true }) readonly title!: string;
   @Prop({ type: [String, Object], default: '#' }) readonly to!: string | object;
 }

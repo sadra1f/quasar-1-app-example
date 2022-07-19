@@ -31,11 +31,11 @@ const linksData = [
   },
   {
     title: 'Finance',
-    to: '#',
+    to: { name: 'finance' },
   },
   {
     title: 'Personnel',
-    to: '#',
+    to: { name: 'personnel' },
   },
 ];
 

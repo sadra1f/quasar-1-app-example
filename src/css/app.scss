@@ -1,1 +1,20 @@
 // app global css in SCSS form
+.q-drawer .label {
+  font-size: 1.1rem;
+}
+
+.q-drawer .q-link {
+  border-left: 8px solid #0000;
+}
+
+.q-drawer .q-router-link--active,
+.q-drawer .q-router-link--exact-active {
+  background-color: #fff;
+  border-left: 8px solid $red-7;
+  font-weight: bold;
+}
+
+.q-drawer .q-router-link--active:hover,
+.q-drawer .q-router-link--exact-active:hover {
+  background-color: #eee1;
+}

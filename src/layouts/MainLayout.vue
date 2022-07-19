@@ -1,36 +1,32 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
-
-        <q-toolbar-title> Quasar App </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-1"
+    <q-page-sticky
+      position="top-left"
+      :offset="[18, 18]"
+      style="z-index: 1000"
+      v-if="testMethod()"
     >
+      <q-btn
+        fab
+        flat
+        dense
+        round
+        icon="menu"
+        aria-label="Menu"
+        @click="leftDrawerOpen = !leftDrawerOpen"
+      />
+    </q-page-sticky>
+
+    <q-drawer behavior="desktop" show-if-above content-class="bg-grey-4">
       <q-list>
-        <q-item-label header class="text-grey-8">
-          Essential Links
+        <q-item-label header class="label text-grey-10 q-py-md-xl text-center">
+          Data<strong>Guard</strong>
         </q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
           :key="link.title"
           v-bind="link"
+          class="q-px-md-xl"
         />
       </q-list>
     </q-drawer>
@@ -47,46 +43,16 @@ import EssentialLink from 'components/EssentialLink.vue';
 
 const linksData = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev',
+    title: 'Marketing',
+    to: { name: 'home' },
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework',
+    title: 'Finance',
+    to: '#',
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev',
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev',
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev',
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev',
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev',
+    title: 'Personnel',
+    to: '#',
   },
 ];
 
@@ -94,7 +60,28 @@ const linksData = [
   components: { EssentialLink },
 })
 export default class MainLayout extends Vue {
+  showFab = true;
   leftDrawerOpen = false;
   essentialLinks = linksData;
+  // this.showFab = window.innerWidth < 1005;
+  // return window.innerWidth < 1005;
+
+  testMethod() {
+    return window.innerWidth < 1005;
+  }
+
+  // resizeHandler(event: Event) {
+  //   console.log(event);
+  // }
+
+  // created() {
+  //   window.addEventListener('resize', this.resizeHandler).bind(this);
+  // }
+
+  // destroyed() {
+  //   window.removeEventListener('resize', (event) => {
+  //     this.resizeHandler(event);
+  //   });
+  // }
 }
 </script>

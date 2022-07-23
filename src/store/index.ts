@@ -1,10 +1,6 @@
 import { store } from 'quasar/wrappers';
 import Vuex from 'vuex';
 
-import { createMockServer } from 'src/mocks/api';
-
-createMockServer();
-
 /*
  * If not building with SSR mode, you can
  * directly export the Store instantiation

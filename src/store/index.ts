@@ -1,8 +1,9 @@
 import { store } from 'quasar/wrappers';
 import Vuex from 'vuex';
 
-// import example from './module-example';
-// import { ExampleStateInterface } from './module-example/state';
+import { createMockServer } from 'src/mocks/api';
+
+createMockServer();
 
 /*
  * If not building with SSR mode, you can

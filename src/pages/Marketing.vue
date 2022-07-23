@@ -23,8 +23,8 @@ import PluginCard from 'components/PluginCard.vue';
 type dataType = {
   id: string;
   title: string;
-  detailes: string;
-  toggle: string;
+  details: string;
+  status: string;
 };
 
 @Component({

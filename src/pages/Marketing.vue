@@ -16,47 +16,32 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+import axios from 'axios';
 
 import PluginCard from 'components/PluginCard.vue';
 
-let testData = [
-  {
-    id: '0',
-    title: 'Plugin 1',
-    details: 'A short text.',
-    status: 'allowed',
-  },
-  {
-    id: '1',
-    title: 'Plugin 2',
-    details: 'A short text.',
-    status: 'blocked',
-  },
-  {
-    id: '2',
-    title: 'Plugin 3',
-    details: 'A short text.',
-    status: 'disabled',
-  },
-  {
-    id: '3',
-    title: 'Plugin 4',
-    details: 'A short text.',
-    status: 'disabled',
-  },
-  {
-    id: '4',
-    title: 'Plugin 5',
-    details: 'A short text.',
-    status: 'allowed',
-  },
-];
+type dataType = {
+  id: string;
+  title: string;
+  detailes: string;
+  toggle: string;
+};
 
 @Component({
   components: { PluginCard },
 })
 export default class Marketing extends Vue {
-  // data: Array<object> = testData;
-  data: typeof testData = testData;
+  data: Array<dataType> = [];
+
+  created() {
+    axios
+      .get('api/marketing')
+      .then((response) => {
+        this.data = response.data as Array<dataType>;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 }
 </script>

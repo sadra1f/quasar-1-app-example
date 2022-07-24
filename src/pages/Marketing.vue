@@ -16,9 +16,10 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import axios from 'axios';
 
+import AxiosClient from 'src/services/axios-client';
 import PluginCard from 'components/PluginCard.vue';
+import { ClientInterface } from 'src/services/interfaces';
 
 type dataType = {
   id: string;
@@ -27,6 +28,8 @@ type dataType = {
   status: string;
 };
 
+let client: ClientInterface = new AxiosClient();
+
 @Component({
   components: { PluginCard },
 })
@@ -34,7 +37,7 @@ export default class Marketing extends Vue {
   data: Array<dataType> = [];
 
   created() {
-    axios
+    client
       .get('api/marketing')
       .then((response) => {
         this.data = response.data as Array<dataType>;

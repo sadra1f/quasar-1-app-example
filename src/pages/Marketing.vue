@@ -17,7 +17,8 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import AxiosClient from 'src/services/axios-client';
+// import AxiosClient from 'src/services/axios-client';
+import FetchClient from 'src/services/fetch-client';
 import PluginCard from 'components/PluginCard.vue';
 import { ClientInterface } from 'src/services/interfaces';
 
@@ -28,7 +29,8 @@ type dataType = {
   status: string;
 };
 
-let client: ClientInterface = new AxiosClient();
+// let client: ClientInterface = new AxiosClient();
+let client: ClientInterface = new FetchClient();
 
 @Component({
   components: { PluginCard },

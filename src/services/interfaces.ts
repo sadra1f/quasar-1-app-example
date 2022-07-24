@@ -3,5 +3,8 @@ export interface ClientInterface {
 }
 
 export interface ClientResponse extends Object {
-  data?: object;
+  data: object;
+  status: number;
+  statusText: string;
+  headers: object;
 }

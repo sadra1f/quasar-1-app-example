@@ -11,8 +11,12 @@ const createMockServer = () => {
     routes() {
       this.namespace = 'api';
 
-      this.get('/marketing', (schema /*, request*/) => {
+      this.get('/marketing', (schema) => {
         return schema.all('plugin').models;
+      });
+
+      this.get('/marketing/:id', (schema, request) => {
+        return schema.find('plugin', request.params.id);
       });
     },
     seeds(server) {

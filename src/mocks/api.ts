@@ -1,43 +1,27 @@
-import { createServer } from 'miragejs';
+import { createServer, Model } from 'miragejs';
+
+import { services, plugins } from './api-data';
 
 const createMockServer = () => {
   return createServer({
+    models: {
+      service: Model,
+      plugin: Model,
+    },
     routes() {
       this.namespace = 'api';
 
-      this.get('/marketing', () => {
-        return [
-          {
-            id: '0',
-            title: 'Plugin 1',
-            details: 'A short text.',
-            status: 'allowed',
-          },
-          {
-            id: '1',
-            title: 'Plugin 2',
-            details: 'A short text.',
-            status: 'blocked',
-          },
-          {
-            id: '2',
-            title: 'Plugin 3',
-            details: 'A short text.',
-            status: 'disabled',
-          },
-          {
-            id: '3',
-            title: 'Plugin 4',
-            details: 'A short text.',
-            status: 'disabled',
-          },
-          {
-            id: '4',
-            title: 'Plugin 5',
-            details: 'A short text.',
-            status: 'allowed',
-          },
-        ];
+      this.get('/marketing', (schema /*, request*/) => {
+        return schema.all('plugin').models;
+      });
+    },
+    seeds(server) {
+      services.forEach((item) => {
+        server.create('service', item);
+      });
+
+      plugins.forEach((item) => {
+        server.create('plugin', item);
       });
     },
   });

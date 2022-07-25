@@ -40,9 +40,10 @@ export default class Marketing extends Vue {
 
   created() {
     client
-      .get('api/marketing')
+      .get('api/services/marketing/plugins')
       .then((response) => {
-        this.data = response.data as Array<dataType>;
+        this.data = (response.data as { [key: string]: object })
+          .plugins as Array<dataType>;
       })
       .catch((error) => {
         console.error(error);

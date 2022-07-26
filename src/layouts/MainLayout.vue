@@ -24,25 +24,46 @@
 import { Vue, Component } from 'vue-property-decorator';
 import DrawerLink from 'components/DrawerLink.vue';
 
-const linksData = [
-  {
-    title: 'Marketing',
-    to: { name: 'service', params: { slug: 'marketing' } },
-  },
-  {
-    title: 'Finance',
-    to: { name: 'service', params: { slug: 'finance' } },
-  },
-  {
-    title: 'Personnel',
-    to: { name: 'service', params: { slug: 'personnel' } },
-  },
-];
+import { ClientInterface } from 'src/services/interfaces';
+import AxiosClient from 'src/services/axios-client';
+
+// eslint-disable-next-line
+type linkType = { title: string; to: { [key: string]: any } };
+
+let client: ClientInterface = new AxiosClient();
 
 @Component({
   components: { DrawerLink },
 })
 export default class MainLayout extends Vue {
-  links = linksData;
+  links: linkType[] = [];
+
+  created() {
+    let data: linkType[] = [];
+
+    client
+      .get('api/services')
+      .then((response) => {
+        (
+          response.data as {
+            services: {
+              id: string;
+              title: string;
+              slug: string;
+            }[];
+          }
+        ).services.forEach((service) => {
+          data.push({
+            title: service.title,
+            to: { name: 'service', params: { slug: service.slug } },
+          });
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    this.links = data;
+  }
 }
 </script>

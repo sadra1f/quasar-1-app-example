@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component, Watch } from 'vue-property-decorator';
 
 // import AxiosClient from 'src/services/axios-client';
 import FetchClient from 'src/services/fetch-client';
@@ -35,12 +35,13 @@ let client: ClientInterface = new FetchClient();
 @Component({
   components: { PluginCard },
 })
-export default class Marketing extends Vue {
+export default class Service extends Vue {
+  slug: string = this.$route.params.slug;
   data: Array<dataType> = [];
 
-  created() {
+  updateData() {
     client
-      .get('api/services/marketing/plugins')
+      .get(`api/services/${this.slug}/plugins`)
       .then((response) => {
         this.data = (response.data as { [key: string]: object })
           .plugins as Array<dataType>;
@@ -48,6 +49,18 @@ export default class Marketing extends Vue {
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  @Watch('$route', { immediate: true, deep: true })
+  onRouteChange(route: { params: { slug: string } }) {
+    if (this.slug != route.params.slug) {
+      this.slug = route.params.slug;
+      this.updateData();
+    }
+  }
+
+  created() {
+    this.updateData();
   }
 }
 </script>

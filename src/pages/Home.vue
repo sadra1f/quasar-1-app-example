@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <p>Personnel Page</p>
+    <p>Please select a service from the side pannel.</p>
   </q-page>
 </template>
 
@@ -8,5 +8,5 @@
 import { Vue, Component } from 'vue-property-decorator';
 
 @Component
-export default class Personnel extends Vue {}
+export default class Home extends Vue {}
 </script>

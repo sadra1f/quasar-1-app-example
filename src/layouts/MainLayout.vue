@@ -27,15 +27,15 @@ import DrawerLink from 'components/DrawerLink.vue';
 const linksData = [
   {
     title: 'Marketing',
-    to: { name: 'home' },
+    to: { name: 'service', params: { slug: 'marketing' } },
   },
   {
     title: 'Finance',
-    to: { name: 'finance' },
+    to: { name: 'service', params: { slug: 'finance' } },
   },
   {
     title: 'Personnel',
-    to: { name: 'personnel' },
+    to: { name: 'service', params: { slug: 'personnel' } },
   },
 ];
 

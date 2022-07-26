@@ -8,17 +8,12 @@ const routes: RouteConfig[] = [
       {
         path: '',
         name: 'home',
-        component: () => import('src/pages/Marketing.vue'),
+        component: () => import('src/pages/Home.vue'),
       },
       {
-        path: 'finance/',
-        name: 'finance',
-        component: () => import('src/pages/Finance.vue'),
-      },
-      {
-        path: 'personnel/',
-        name: 'personnel',
-        component: () => import('src/pages/Personnel.vue'),
+        path: 'services/:slug',
+        name: 'service',
+        component: () => import('src/pages/Service.vue'),
       },
     ],
   },

@@ -4,7 +4,7 @@ export interface ServiceInterface {
   slug: string;
 }
 
-export interface PluginsInterface {
+export interface PluginInterface {
   id: string;
   title: string;
   details: string;
@@ -15,7 +15,7 @@ export interface PluginsInterface {
 export interface DataStateInterface {
   prop: boolean;
   services: ServiceInterface[];
-  plugins: PluginsInterface[];
+  plugins: PluginInterface[];
 }
 
 function state(): DataStateInterface {

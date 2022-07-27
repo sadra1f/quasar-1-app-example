@@ -22,6 +22,7 @@ import { Toggle } from 'components/types';
 
 @Component
 export default class PluginCard extends Vue {
+  @Prop({ type: String, required: true }) readonly pluginId!: string;
   @Prop({ type: String, required: true }) readonly title!: string;
   @Prop({ type: String }) readonly details: string | undefined;
   @Prop({ type: String as PropType<Toggle>, default: 'blocked' })
@@ -37,12 +38,19 @@ export default class PluginCard extends Vue {
     if (this.toggle != 'disabled') {
       this.allowedData = value;
       this.toggleStat = value ? 'allowed' : 'blocked';
+
+      this.$emit('toggle', { id: this.pluginId, status: this.toggleStat });
     }
   }
 
   created() {
+    const initialValue = this.toggle == 'allowed';
     this.toggleStat = this.toggle;
-    this.allowed = this.toggle == 'allowed';
+
+    if (this.toggle != 'disabled') {
+      this.allowedData = initialValue;
+      this.toggleStat = initialValue ? 'allowed' : 'blocked';
+    }
   }
 }
 </script>

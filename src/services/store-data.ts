@@ -54,3 +54,22 @@ export function getPlugins(store: StoreType): PluginInterface[] {
     'data/plugins'
   ];
 }
+
+export function updatePlugin(
+  store: StoreType,
+  serviceSlug: string,
+  plugin: PluginInterface
+) {
+  const client: ClientInterface = new AxiosClient();
+  const plugins: PluginInterface[] = getPlugins(store);
+
+  client
+    .patch(`api/services/${serviceSlug}/plugins/${plugin.id}`, plugin)
+    .then((/* res */) => {
+      const pluginIndex = plugins.findIndex((item) => item.id == plugin.id);
+
+      plugins[pluginIndex] = plugin;
+      store.commit('data/setPlugins', plugins);
+    })
+    .catch((error) => console.log(error));
+}

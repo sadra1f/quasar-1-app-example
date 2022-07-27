@@ -5,9 +5,11 @@
     <div class="row">
       <div class="col-4 q-pa-sm" v-for="item in plugins" :key="item.id">
         <PluginCard
+          :pluginId="item.id"
           :title="item.title"
           :details="item.details"
           :toggle="item.status"
+          @toggle="toggleHandler"
         />
       </div>
     </div>
@@ -24,6 +26,7 @@ import {
   getPlugins,
   getServices,
   storePlugins,
+  updatePlugin,
 } from 'src/services/store-data';
 
 @Component({
@@ -43,6 +46,18 @@ export default class Service extends Vue {
   updateData() {
     clearPlugins(this.$store);
     storePlugins(this.$store, this.slug);
+  }
+
+  toggleHandler(data: { id: string; status: string }) {
+    const plugin = this.plugins.find((item) => item.id == data.id);
+
+    if (plugin) {
+      updatePlugin(this.$store, this.slug, {
+        ...plugin,
+        id: data.id,
+        status: data.status,
+      });
+    }
   }
 
   @Watch('$route', { immediate: true, deep: true })

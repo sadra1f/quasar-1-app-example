@@ -53,6 +53,23 @@ const createMockServer = () => {
         }
         return {};
       });
+
+      this.patch('/services/:service/plugins/:id', (schema, request) => {
+        const serviceId = schema.findBy('service', {
+          slug: request.params.service,
+        } as serviceType)?.id;
+
+        if (serviceId) {
+          const newAttrs = JSON.parse(request.requestBody) as object;
+          const plugin = schema.findBy('plugin', {
+            id: request.params.id,
+            service_id: serviceId,
+          } as pluginType);
+
+          plugin?.update(newAttrs);
+        }
+        return {};
+      });
     },
     seeds(server) {
       services.forEach((item) => {

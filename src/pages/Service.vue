@@ -3,7 +3,11 @@
     <h4>{{ service?.title ?? 'Service' }}</h4>
 
     <div class="row">
-      <div class="col-4 q-pa-sm" v-for="item in plugins" :key="item.id">
+      <div
+        class="col-12 col-md-4 col-lg-3 q-pa-sm"
+        v-for="item in plugins"
+        :key="item.id"
+      >
         <PluginCard
           :pluginId="item.id"
           :title="item.title"
